@@ -1,0 +1,24 @@
+https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/
+
+Some things to note:
+
+
+This chapter is dedicated to exploring these fundamental data types in detail (except std::nullptr_t, which we’ll discuss when we talk about pointers). C++ also supports a number of other more complex types, called “compound types”. We’ll explore compound types in a future chapter.
+
+
+Nomenclature:
+
+The terms “integer” and “integral” are similar, but have slightly different meanings.
+
+In mathematics, an “integer” is a number with no decimal or fractional part, including negative and positive numbers and zero.
+
+In C++, the term “integer” is most often used to refer to the int data type, which holds integer values. However, it is also sometimes used to refer to the broader set of data types that are commonly used to store and display integer values. This includes short, int, long, long long, and their signed and unsigned variants.
+
+The term “integral” means “like an integer”. Most often, “integral” is used as part of the term “integral type”, which includes the broader set of types that are stored in memory as integers, even though their behaviors might vary (which we’ll see later in this chapter when we talk about the character types). This includes bool, the integer types, and all the various character types.
+
+
+The _t suffix:
+
+Many of the types defined in newer versions of C++ (e.g. std::nullptr_t) use a _t suffix. This suffix means “type”, and it’s a common nomenclature applied to modern types.
+
+If you see something with a _t suffix, it’s probably a type. But many types don’t have a _t suffix, so this isn’t consistently applied
