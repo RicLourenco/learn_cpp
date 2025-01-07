@@ -1,0 +1,14 @@
+Modern debuggers contain one more debugging information window that can be very
+useful in debugging your program, and that is the call stack window.
+
+When your program calls a function, you already know that it bookmarks the current
+location, makes the function call, and then returns. How does it know where to
+return to? The answer is that it keeps track in the call stack.
+
+The call stack is a list of all the active functions that have been called to get
+to the current point of execution. The call stack includes an entry for each
+function called, as well as which line of code will be returned to when the
+function returns. Whenever a new function is called, that function is added to the
+top of the call stack. When the current function returns to the caller, it is
+removed from the top of the call stack, and control returns to the function just
+below it
