@@ -1,0 +1,7 @@
+Key insight:
+New programmers often focus too much on optimizing their code to use as little
+memory as possible. In most cases, this makes a negligible difference. Focus on
+writing maintainable code, and optimize only when and where the benefit will be
+substantive.
+
+
