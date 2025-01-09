@@ -1,0 +1,21 @@
+Key insight:
+New programmers often focus too much on optimizing their code to use as little
+memory as possible. In most cases, this makes a negligible difference. Focus on
+writing maintainable code, and optimize only when and where the benefit will be
+substantive
+
+
+Some data types I wasn't familiar with:
+Type            Min. size       Typical size
+wchar_t	1       byte            2 or 4 bytes
+char8_t	1       byte	        1 byte
+char16_t        2 bytes	        2 bytes
+char32_t	    4 bytes	        4 bytes
+std::nullptr_t	4 bytes	        4 or 8 bytes
+
+Tip:
+For maximum portability, you shouldn’t assume that objects are larger than the
+specified minimum size.
+Alternatively, if you want to assume that a type has some non-minimum size (e.g.
+that an int is at least 4 bytes), you can use static_assert to have the compiler
+fail a build if it is compiled on an architecture where this assumption is not true
