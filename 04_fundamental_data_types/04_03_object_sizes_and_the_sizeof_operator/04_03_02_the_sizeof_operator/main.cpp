@@ -36,7 +36,6 @@ int main()
 }
 
 /* As an aside…
-
 You might assume that types that use less memory would be faster than types that
 use more memory. This is not always true. CPUs are often optimized to process data
 of a certain size (e.g. 32 bits), and types that match that size may be processed
