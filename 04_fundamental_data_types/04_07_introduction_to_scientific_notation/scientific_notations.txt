@@ -1,0 +1,52 @@
+Consider the mass of the Earth. In decimal notation, we’d write this as
+5972200000000000000000000 kg. That’s a really large number (too big to fit even in
+an 8 byte integer).
+
+In scientific notation, this would be written as 5.9722 x 10²⁴ kg, which is much
+easier to read. Scientific notation has the added benefit of making it easier to
+compare the magnitude of two extremely large or small numbers simply by comparing
+the exponent.
+Because it can be hard to type or display exponents in C++, we use the letter ‘e’
+(or sometimes ‘E’) to represent the “times 10 to the power of” part of the
+equation. For example, 1.2 x 10⁴ would be written as 1.2e4, and 5.9722 x 10²⁴ would
+be written as 5.9722e24.
+For numbers smaller than 1, the exponent can be negative. The number 5e-2 is
+equivalent to 5 * 10⁻², which is 5 / 10², or 0.05. The mass of an electron is
+9.1093837e-31 kg.
+
+
+
+How to convert decimal numbers to scientific notation
+
+Use the following procedure:
+- Your exponent starts at zero.
+- Slide the decimal left or right so there is only one non-zero digit to the left
+of the decimal.
+    - Each place you slide the decimal to the left increases the exponent by 1.
+    - Each place you slide the decimal to the right decreases the exponent by 1.
+- Trim off any leading zeros (on the left end of the significand)
+- Trim off any trailing zeros (on the right end of the significand) only if the
+original number had no decimal point. We’re assuming they’re not significant. If
+you have additional information to suggest they are significant, you can keep them.
+
+Here’s some examples:
+
+Start with: 600.410
+Slide decimal left 2 spaces: 6.00410e2
+No leading zeros to trim: 6.00410e2
+Don't trim trailing zeros: 6.00410e2 (6 significant digits)
+
+Start with: 0.0078900
+Slide decimal right 3 spaces: 0007.8900e-3
+Trim leading zeros: 7.8900e-3
+Don't trim trailing zeros: 7.8900e-3 (5 significant digits)
+
+Start with: 42030 (no information to suggest the trailing zero is significant)
+Slide decimal left 4 spaces: 4.2030e4
+No leading zeros to trim: 4.2030e4
+Trim trailing zeros: 4.203e4 (4 significant digits)
+
+Start with: 42030 (assuming the trailing zero is significant)
+Slide decimal left 4 spaces: 4.2030e4
+No leading zeros to trim: 4.2030e4
+Keep trailing zeros: 4.2030e4 (5 significant digits)
