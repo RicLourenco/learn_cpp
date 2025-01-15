@@ -50,3 +50,28 @@ Start with: 42030 (assuming the trailing zero is significant)
 Slide decimal left 4 spaces: 4.2030e4
 No leading zeros to trim: 4.2030e4
 Keep trailing zeros: 4.2030e4 (5 significant digits)
+
+
+
+Handling trailing zeros
+
+When converting to scientific notation, trailing zeros after a decimal are
+considered significant, so we keep them:
+
+87.0g = 8.70e1
+87.000g = 8.7000e1
+For numbers with no decimal point, trailing zeros are considered to be
+insignificant by default. Given the number 2100 (with no additional information),
+we assume the trailing 0s are not significant, so we drop them:
+
+2100 = 2.1e3 (trailing zeros assumed not significant)
+However, if we happened to know that this number was measured precisely (or that
+the actual number was somewhere between 2099.5 and 2100.5), then we should instead
+treat those zeros as significant:
+
+2100 = 2.100e3 (trailing zeros known significant)
+Tip
+You may occasionally see a number written with a trailing decimal point. This is an
+indication that the preceding zeros are significant.
+
+2100. = 2.100e3 (trailing zeros known significant)
