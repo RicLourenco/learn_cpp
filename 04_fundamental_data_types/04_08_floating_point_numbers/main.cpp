@@ -151,6 +151,70 @@ Best practice
 Favor double over float unless space is at a premium, as the lack of precision in a
 float will often lead to inaccuracies. */
 
+
+/* Rounding errors make floating point comparisons tricky
+
+Floating point numbers are tricky to work with due to non-obvious differences
+between binary (how data is stored) and decimal (how we think) numbers. Consider
+the fraction 1/10. In decimal, this is easily represented as 0.1, and we are used
+to thinking of 0.1 as an easily representable number with 1 significant digit.
+However, in binary, decimal value 0.1 is represented by the infinite sequence:
+0.00011001100110011… Because of this, when we assign 0.1 to a floating point
+number, we’ll run into precision problems. */
+
+void ex6()
+{
+    double d{0.1};
+    std::cout << d << '\n'; 
+    std::cout << std::setprecision(17);
+    std::cout << d << '\n';
+}
+
+/* This outputs:
+0.1
+0.10000000000000001
+
+On the top line, std::cout prints 0.1, as we expect.
+On the bottom line, where we have std::cout show us 17 digits of precision, we see
+that d is actually not quite 0.1! This is because the double had to truncate the
+approximation due to its limited memory. The result is a number that is precise to
+16 significant digits (which type double guarantees), but the number is not exactly
+0.1. Rounding errors may make a number either slightly smaller or slightly larger,
+depending on where the truncation happens.
+
+Rounding errors can have unexpected consequences: */
+
+void ex7()
+{
+    std::cout << std::setprecision(17);
+
+    double d1{ 1.0 };
+    std::cout << d1 << '\n';
+
+    double d2{ 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 }; 
+    std::cout << d2 << '\n';
+}
+
+/* 1
+0.99999999999999989
+
+If we were to compare d1 and d2 in a program, the program would probably not
+perform as expected. Because floating point numbers tend to be inexact, comparing
+floating point numbers is generally problematic
+One last note on rounding errors: mathematical operations (such as addition and
+multiplication) tend to make rounding errors grow. So even though 0.1 has a
+rounding error in the 17th significant digit, when we add 0.1 ten times, the
+rounding error has crept into the 16th significant digit. Continued operations
+would cause this error to become increasingly significant.
+
+Key insight
+Rounding errors occur when a number can’t be stored precisely. This can happen even
+with simple numbers, like 0.1. Therefore, rounding errors can, and do, happen all
+the time. Rounding errors aren’t the exception -- they’re the norm. Never assume
+your floating point numbers are exact.
+A corollary of this rule is: be wary of using floating point numbers for financial
+or currency data. */
+
 int main()
 {
     ex1();
@@ -158,6 +222,8 @@ int main()
     ex3();
     ex4();
     ex5();
+    ex6();
+    ex7();
 
     return 0;
 }
