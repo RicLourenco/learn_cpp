@@ -215,6 +215,67 @@ your floating point numbers are exact.
 A corollary of this rule is: be wary of using floating point numbers for financial
 or currency data. */
 
+
+/* NaN and Inf
+
+EEE 754 compatible formats additionally support some special values:
+- Inf, which represents infinity. Inf is signed, and can be positive (+Inf) or
+negative (-Inf).
+- NaN, which stands for “Not a Number”. There are several different kinds of NaN
+(which we won’t discuss here).
+- Signed zero, meaning there are separate representations for “positive zero”
+(+0.0) and “negative zero” (-0.0).
+
+Formats that are not compatible with IEEE 754 may not support some (or any) of
+these values. In such cases, code that uses or generates these special values will
+produce implementation-defined behavior. */
+
+void ex8()
+{
+    double zero { 0.0 };
+
+    double posinf { 5.0 / zero }; 
+    std::cout << posinf << '\n';
+
+    double neginf { -5.0 / zero }; 
+    std::cout << neginf << '\n';
+
+    double z1 { 0.0 / posinf }; 
+    std::cout << z1 << '\n';
+
+    double z2 { -0.0 / posinf }; 
+    std::cout << z2 << '\n';
+
+    double nan { zero / zero }; 
+    std::cout << nan << '\n';
+}
+
+/* And the results using Clang:
+inf
+-inf
+0
+-0
+nan
+
+Note that the results of printing Inf and NaN are platform specific, so your
+results may vary (e.g. Visual Studio prints the last result as -nan(ind)).
+
+Best practice
+Avoid division by 0.0, even if your compiler supports it. */
+
+
+/* Conclusion
+
+To summarize, the two things you should remember about floating point numbers:
+- Floating point numbers are useful for storing very large or very small numbers,
+including those with fractional components.
+- Floating point numbers often have small rounding errors, even when the number has
+fewer significant digits than the precision. Many times these go unnoticed because
+they are so small, and because the numbers are truncated for output. However,
+comparisons of floating point numbers may not give the expected results. Performing
+mathematical operations on these values will cause the rounding errors to grow
+larger. */
+
 int main()
 {
     ex1();
@@ -224,6 +285,7 @@ int main()
     ex5();
     ex6();
     ex7();
+    ex8();
 
     return 0;
 }
